@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Fly</title>
+<style>
+  body {
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #letter {
+    width: 200px;
+    height: 200px;
+    background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  #heart {
+    display: none;
+    position: absolute;
+    transition: all 0.5s ease;
+  }
+</style>
+</head>
+<body>
+<audio id="audio" src="sound.mp3"></audio>
+<div id="letter" onclick="flyHearts()">
+  Click me!
+  <img id="heart" src="heart.png" alt="heart" width="30" height="30">
+</div>
+<script>
+  function flyHearts() {
+    var container = document.getElementById('letter');
+    var heart = document.getElementById('heart').cloneNode(true);
+    var x = Math.random() * (window.innerWidth - 30);
+    var y = Math.random() * (window.innerHeight - 30);
+    heart.style.left = x + 'px';
+    heart.style.top = y + 'px';
+    container.appendChild(heart);
+    var audio = document.getElementById('audio');
+    audio.play(); // Phát âm thanh khi bức thư được nhấp vào
+    setTimeout(function() {
+      heart.style.transform = 'translate(-50%, -50%) scale(2)';
+      heart.style.opacity = '0';
+    }, 10);
+    setTimeout(function() {
+      heart.remove();
+    }, 1000);
+  }
+</script>
+</body>
+</html>
